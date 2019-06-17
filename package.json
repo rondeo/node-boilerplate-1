@@ -3,7 +3,8 @@
   "name": "node-boilerplate",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "lint-staged",
+    "test": "npm run lint"
   },
   "config": {
     "commitizen": {
@@ -28,6 +29,7 @@
     "eslint-plugin-promise": "^4.1.1",
     "eslint-plugin-standard": "^4.0.0",
     "husky": "^2.4.1",
+    "lint-staged": "^8.2.1",
     "prettier": "^1.18.2",
     "semantic-release": "^15.13.16"
   }
