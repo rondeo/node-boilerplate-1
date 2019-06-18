@@ -3,17 +3,17 @@ kind: pipeline
 name: pr
 
 steps:
-- name: npm install
+- name: install
   image: node
   commands:
-  - npm ci -d
+  - npm ci
 
 - name: commitlint
   image: node
   commands:
   - npx commitlint --from master --to HEAD || exit 1
 
-- name: npm test
+- name: test
   image: node
   commands:
   - npm test
@@ -27,10 +27,10 @@ kind: pipeline
 name: release
 
 steps:
-- name: npm install
+- name: install
   image: node
   commands:
-  - npm ci -d
+  - npm ci
 
 - name: semantic-release
   image: node
