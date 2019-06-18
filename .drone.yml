@@ -3,12 +3,12 @@ name: default
 
 steps:
 - name: install
-  image: &node_image node:lts-alpine
+  image: node
   commands:
     - npm ci
 
 - name: commitlint
-  image: *node_image
+  image: node
   commands:
     - npx commitlint --from master --to HEAD || exit 1
   when:
@@ -16,7 +16,7 @@ steps:
       - pull_request
 
 - name: test
-  image: *node_image
+  image: node
   commands:
     - npm test
   when:
@@ -24,7 +24,7 @@ steps:
       - pull_request
 
 - name: release
-  image: *node_image
+  image: node
   environment:
     GITHUB_TOKEN:
       from_secret: github_token
