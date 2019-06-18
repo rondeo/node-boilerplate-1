@@ -11,7 +11,7 @@ steps:
 - name: commitlint
   image: node
   commands:
-  - npx commitlint --from origin/master --to HEAD || exit 1
+  - npx commitlint --from origin/master --to HEAD
 
 - name: test
   image: node
