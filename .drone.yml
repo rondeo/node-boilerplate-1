@@ -2,8 +2,36 @@ kind: pipeline
 name: default
 
 steps:
-- name: test
-  image: node
+- name: install
+  image: &node_image node:lts-alpine
   commands:
-  - npm install
-  - npm test
+    - npm ci
+
+- name: commitlint
+  image: *node_image
+  commands:
+    - npx commitlint --from master --to HEAD || exit 1
+  when:
+    event:
+      - pull_request
+
+- name: test
+  image: *node_image
+  commands:
+    - npm test
+  when:
+    event:
+      - pull_request
+
+- name: release
+  image: *node_image
+  environment:
+    GITHUB_TOKEN:
+      from_secret: github_token
+  commands:
+    - npx semantic-release
+  when:
+    branch:
+      - master
+    event:
+      - push
