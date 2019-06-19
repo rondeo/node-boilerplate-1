@@ -11,3 +11,7 @@ test('another index', () => {
 test('another index 2', () => {
   expect(index(2, 3)).toBe(5);
 });
+
+test('another index 3', () => {
+  expect(index(3, 4)).toBe(7);
+});
